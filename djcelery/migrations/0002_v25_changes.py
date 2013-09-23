@@ -40,7 +40,7 @@ class Migration(SchemaMigration):
 
     def apply_current_migration(self):
         # Adding field 'PeriodicTask.description'
-        db.add_column('djcelery_periodictask', 'description', self.gf('django.db.models.fields.TextField')(default='', blank=True), keep_default=False)
+        db.execute("ALTER TABLE djcelery_periodictask add (description CLOB default '');")
 
         # Adding field 'TaskMeta.hidden'
         db.add_column('celery_taskmeta', 'hidden', self.gf('django.db.models.fields.BooleanField')(default=False, db_index=True), keep_default=False)
